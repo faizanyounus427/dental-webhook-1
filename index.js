@@ -2,23 +2,58 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-// Handles Retell webhook test (GET) and real calls (POST)
 app.all('/webhook/:clinicName', async (req, res) => {
   try {
     if (req.method === 'GET') {
       return res.sendStatus(200);
     }
 
-    const { event, call } = req.body;
+    const event = req.body.event;
+    const call = req.body.call;
     const clinicName = req.params.clinicName;
 
     if (event === 'call_analyzed') {
-      const d = call?.call_analysis?.custom_analysis_data || {};
+      const d = call.call_analysis.custom_analysis_data || {};
 
-      const message = `
-<h2>New Appointment Request - ${clinicName}</h2>
-<table style="font-family:Arial;font-size:15px;border-collapse:collapse">
-  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Patient Name</td><td style="padding:8px">${d['Patient Name'] || 'Not provided'}</td></tr>
-  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Phone Number</td><td style="padding:8px">${d['Phone Number'] || 'Not provided'}</td></tr>
-  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Reason for Visit</td><td style="padding:8px">${d['Reason For Visit'] || 'Not provided'}</td></tr>
-  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Preferred Date</td><td style="padding:8px
+      const name = d['Patient Name'] || 'Not provided';
+      const phone = d['Phone Number'] || 'Not provided';
+      const reason = d['Reason For Visit'] || 'Not provided';
+      const date = d['Appointment Date'] || 'Not provided';
+      const time = d['Appointment Time'] || 'Not provided';
+
+      const subject = 'New Appointment Request - ' + clinicName;
+      const html = '<h2>New Appointment - ' + clinicName + '</h2>' +
+        '<p><b>Patient Name:</b> ' + name + '</p>' +
+        '<p><b>Phone Number:</b> ' + phone + '</p>' +
+        '<p><b>Reason for Visit:</b> ' + reason + '</p>' +
+        '<p><b>Preferred Date:</b> ' + date + '</p>' +
+        '<p><b>Preferred Time:</b> ' + time + '</p>';
+
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + process.env.RESEND_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: 'AI Receptionist <onboarding@resend.dev>',
+          to: process.env.CLINIC_EMAIL,
+          subject: subject,
+          html: html
+        })
+      });
+
+      console.log('Email sent for ' + clinicName);
+    }
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('Webhook error:', err.message);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/', (req, res) => res.send('Dental AI Webhook is running!'));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log('Server running on port ' + PORT));
