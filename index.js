@@ -1,15 +1,6 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const app = express();
 app.use(express.json());
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
-  }
-});
 
 app.post('/webhook/:clinicName', async (req, res) => {
   try {
@@ -20,22 +11,29 @@ app.post('/webhook/:clinicName', async (req, res) => {
       const d = call?.call_analysis?.custom_analysis_data || {};
 
       const message = `
-New Appointment Request - ${clinicName}
-
-Patient Name  : ${d['Patient Name'] || 'Not provided'}
-Phone Number  : ${d['Phone Number'] || 'Not provided'}
-Reason        : ${d['Reason For Visit'] || 'Not provided'}
-Date          : ${d['Appointment Date'] || 'Not provided'}
-Time          : ${d['Appointment Time'] || 'Not provided'}
-
-Please confirm availability and contact the patient.
+<h2>New Appointment Request - ${clinicName}</h2>
+<table style="font-family:Arial;font-size:15px;border-collapse:collapse">
+  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Patient Name</td><td style="padding:8px">${d['Patient Name'] || 'Not provided'}</td></tr>
+  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Phone Number</td><td style="padding:8px">${d['Phone Number'] || 'Not provided'}</td></tr>
+  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Reason for Visit</td><td style="padding:8px">${d['Reason For Visit'] || 'Not provided'}</td></tr>
+  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Preferred Date</td><td style="padding:8px">${d['Appointment Date'] || 'Not provided'}</td></tr>
+  <tr><td style="padding:8px;font-weight:bold;background:#f0f4f8">Preferred Time</td><td style="padding:8px">${d['Appointment Time'] || 'Not provided'}</td></tr>
+</table>
+<p style="color:#666;font-size:13px">Please confirm availability and contact the patient.</p>
       `.trim();
 
-      await transporter.sendMail({
-        from: process.env.GMAIL_USER,
-        to: process.env.CLINIC_EMAIL,
-        subject: `New Appointment - ${clinicName}`,
-        text: message
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: 'AI Receptionist <onboarding@resend.dev>',
+          to: process.env.CLINIC_EMAIL,
+          subject: `New Appointment Request - ${clinicName}`,
+          html: message
+        })
       });
 
       console.log(`Email sent for ${clinicName}`);
