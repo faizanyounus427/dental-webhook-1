@@ -8,7 +8,7 @@ app.all('/webhook/:clinicName', async (req, res) => {
       return res.sendStatus(200);
     }
 
-    const event = req.body.event;
+    console.log('Webhook received:', req.method, req.body.event);
     const call = req.body.call;
     const clinicName = req.params.clinicName;
 
