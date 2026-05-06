@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dental Receptionist - Demo Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🦷 AI Dental Receptionist</h1>
+                <p class="subtitle">Professional Appointment Management System</p>
+            </div>
+            <div class="clinic-selector">
+                <label for="clinicSelect">Select Clinic:</label>
+                <select id="clinicSelect">
+                    <option value="">Loading...</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Statistics Dashboard -->
+        <section class="dashboard">
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <h3>Total Appointments</h3>
+                    <p class="stat-value" id="totalStats">0</p>
+                    <span class="stat-label">This Month</span>
+                </div>
+                <div class="stat-card completed">
+                    <h3>Completed</h3>
+                    <p class="stat-value" id="completedStats">0</p>
+                    <span class="stat-label">Successfully Booked</span>
+                </div>
+                <div class="stat-card scheduled">
+                    <h3>Scheduled</h3>
+                    <p class="stat-value" id="scheduledStats">0</p>
+                    <span class="stat-label">Pending Confirmation</span>
+                </div>
+                <div class="stat-card cancelled">
+                    <h3>Cancelled</h3>
+                    <p class="stat-value" id="cancelledStats">0</p>
+                    <span class="stat-label">Cancellations</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <h2>Appointment Status Distribution</h2>
+                <canvas id="statusChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Call Sentiment Analysis</h2>
+                <canvas id="sentimentChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Appointments Table -->
+        <section class="appointments-section">
+            <div class="section-header">
+                <h2>Recent Appointments</h2>
+                <div class="filters">
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <input type="date" id="dateFilter" placeholder="Filter by date">
+                    <button onclick="applyFilters()" class="btn-primary">Apply Filters</button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="appointmentsTable">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Phone</th>
+                            <th>Reason</th>
+                            <th>Date & Time</th>
+                            <th>Status</th>
+                            <th>Sentiment</th>
+                            <th>Duration</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsList">
+                        <tr><td colspan="8" class="loading">Loading appointments...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Modal for Appointment Details -->
+        <div id="appointmentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Appointment Details</h2>
+                <div id="modalBody"></div>
+                <div class="modal-actions">
+                    <select id="statusSelect">
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <textarea id="notesInput" placeholder="Add notes..."></textarea>
+                    <button onclick="saveAppointmentUpdate()" class="btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/dashboard.js"></script>
+</body>
+</html>
