@@ -1,7 +1,12 @@
 const express = require('express');
+const path = require('path');
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ✅ SERVE STATIC FILES FROM PUBLIC FOLDER
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.all('/webhook/:clinicName', async (req, res) => {
   try {
@@ -56,7 +61,10 @@ app.all('/webhook/:clinicName', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => res.send('Dental AI Webhook is running!'));
+// ✅ SERVE INDEX.HTML FOR ROOT PATH
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Server running on port ' + PORT));
+app.listen(PORT, () => console.log('🦷 Dental AI Server running on port ' + PORT));
