@@ -1,0 +1,89 @@
+{
+  "clinic_name": "SmileCare Dental Clinic",
+  "packages": [
+    {
+      "id": "basic",
+      "name": "Basic Care Package",
+      "price": "$99/month",
+      "features": [
+        "2 routine cleanings per year",
+        "1 annual exam",
+        "X-rays included",
+        "10% discount on additional treatments",
+        "Emergency phone support"
+      ],
+      "ideal_for": "Individuals with good dental health",
+      "sarah_pitch": "Our Basic Care Package is perfect for maintaining your healthy smile. For just $99 per month, you get two professional cleanings, an annual exam, and X-rays included. Plus, you'll save 10% on any additional treatments you might need."
+    },
+    {
+      "id": "premium",
+      "name": "Premium Care Package",
+      "price": "$199/month",
+      "features": [
+        "4 routine cleanings per year",
+        "2 comprehensive exams",
+        "All X-rays and diagnostics",
+        "1 professional whitening session per year",
+        "20% discount on cosmetic procedures",
+        "Priority scheduling",
+        "24/7 emergency hotline"
+      ],
+      "ideal_for": "Those seeking comprehensive dental care and cosmetic enhancements",
+      "sarah_pitch": "The Premium Care Package gives you everything in Basic, plus quarterly cleanings, professional whitening, and priority scheduling. At $199 per month, it's our most popular choice for people who want to maintain a brilliant, healthy smile year-round."
+    },
+    {
+      "id": "family",
+      "name": "Family Care Package",
+      "price": "$299/month",
+      "features": [
+        "Covers up to 4 family members",
+        "Unlimited routine cleanings",
+        "All exams and X-rays",
+        "Fluoride treatments for children",
+        "Orthodontic consultation included",
+        "25% discount on major procedures",
+        "Family scheduling coordination",
+        "Dedicated family care coordinator"
+      ],
+      "ideal_for": "Families with children or multiple members needing care",
+      "sarah_pitch": "Our Family Care Package is designed for busy families. For $299 per month, you can cover up to 4 family members with unlimited cleanings, all exams, and special care for children including fluoride treatments. We'll even assign you a dedicated coordinator to manage everyone's appointments."
+    },
+    {
+      "id": "enterprise",
+      "name": "Corporate Wellness Package",
+      "price": "Custom pricing",
+      "features": [
+        "Coverage for 10+ employees",
+        "On-site dental screenings",
+        "Preventive care workshops",
+        "Flexible scheduling for employees",
+        "Corporate billing",
+        "Annual wellness reports",
+        "Dedicated account manager"
+      ],
+      "ideal_for": "Businesses wanting to provide dental benefits to employees",
+      "sarah_pitch": "We offer Corporate Wellness Packages for businesses looking to provide dental benefits. We can do on-site screenings, provide flexible scheduling for your team, and offer custom pricing based on the number of employees. Let's discuss what would work best for your company."
+    }
+  ],
+  "cold_call_script_templates": {
+    "introduction": "Hello, this is Sarah calling from SmileCare Dental Clinic. I'm reaching out today because we're offering special dental care packages in your area. Do you have a moment to hear about our services?",
+    "qualification": "Are you currently happy with your dental care provider? When was your last dental checkup?",
+    "package_presentation": "Based on what you've told me, I think our {package_name} would be perfect for you. {sarah_pitch}",
+    "objection_handling": {
+      "too_expensive": "I understand cost is a concern. Keep in mind this includes preventive care that can help you avoid costly emergency treatments later. Plus, we offer a 10% discount if you sign up today.",
+      "already_have_dentist": "That's great that you have a dentist! Many of our clients actually keep their current dentist and use our package for additional preventive care or family members. Would that be of interest?",
+      "need_to_think": "Absolutely, I understand. Can I send you more information via email? Also, we have a limited-time offer ending this month - would you like me to reserve a spot for you while you decide?"
+    },
+    "closing": "Wonderful! I'd love to get you scheduled for a consultation where we can show you our facility and answer any questions. What day works best for you this week?",
+    "follow_up": "Thank you for your time today. I'll send you the package details via email. Feel free to call us at any time if you have questions. Have a great day!"
+  },
+  "conversation_flow": [
+    "greeting_and_introduction",
+    "qualification_questions",
+    "identify_needs",
+    "present_appropriate_package",
+    "handle_objections",
+    "schedule_consultation_or_follow_up",
+    "thank_and_close"
+  ]
+}

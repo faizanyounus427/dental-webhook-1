@@ -1,0 +1,24 @@
+{
+  "event": "call_analyzed",
+  "call": {
+    "call_id": "test_call_12345",
+    "from_number": "+12345678901",
+    "to_number": "+12602612176",
+    "direction": "inbound",
+    "start_timestamp": 1716249600,
+    "end_timestamp": 1716249780,
+    "recording_url": "https://api.retellai.com/recordings/test_recording.mp3",
+    "transcription": "Hi, I'd like to book a dental appointment. My name is John Doe. My phone number is 555-123-4567. I need a teeth cleaning. I'd prefer next Tuesday around 2 PM if possible. Thank you!",
+    "call_analysis": {
+      "custom_analysis_data": {
+        "Patient Name": "John Doe",
+        "Phone Number": "555-123-4567",
+        "Reason For Visit": "Teeth cleaning",
+        "Appointment Date": "2026-05-27",
+        "Appointment Time": "2:00 PM"
+      },
+      "call_successful": true,
+      "call_summary": "Patient successfully booked a teeth cleaning appointment for next Tuesday at 2 PM"
+    }
+  }
+}

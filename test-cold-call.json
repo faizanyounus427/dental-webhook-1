@@ -1,0 +1,26 @@
+{
+  "event": "call_analyzed",
+  "call": {
+    "call_id": "cold_call_67890",
+    "from_number": "+12602612176",
+    "to_number": "+19876543210",
+    "direction": "outbound",
+    "start_timestamp": 1716249900,
+    "end_timestamp": 1716250020,
+    "recording_url": "https://api.retellai.com/recordings/cold_call_recording.mp3",
+    "transcription": "Hello, this is Sarah from SmileCare Dental Clinic. I'm calling to let you know about our special packages. We have three options: Basic Package at $99/month includes routine cleanings, Premium Package at $199/month includes cleanings plus whitening, and Family Package at $299/month covers up to 4 family members. Would you be interested in scheduling a consultation?",
+    "call_analysis": {
+      "custom_analysis_data": {
+        "Patient Name": "Jane Smith",
+        "Phone Number": "987-654-3210",
+        "Reason For Visit": "Package consultation",
+        "Appointment Date": "2026-05-28",
+        "Appointment Time": "10:00 AM",
+        "Package Interest": "Premium Package",
+        "Call Type": "Outbound Cold Call"
+      },
+      "call_successful": true,
+      "call_summary": "Successfully pitched dental packages. Customer interested in Premium Package and scheduled consultation."
+    }
+  }
+}
