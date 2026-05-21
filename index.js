@@ -73,7 +73,8 @@ app.all('/webhook/:clinicName', async (req, res) => {
         { clinicName },
         {
           $inc: { totalAppointments: 1, completedCalls: 1 }
-        }
+        },
+        { upsert: true }
       );
 
       // Send email notification
@@ -137,5 +138,12 @@ function analyzeSentiment(text) {
   return 'neutral';
 }
 
+// Server startup and Vercel export
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🦷 Dental AI Server running on port ${PORT}`));
+
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => console.log(`🦷 Dental AI Server running on port ${PORT}`));
+}
+
+// Export for Vercel
+module.exports = app;
