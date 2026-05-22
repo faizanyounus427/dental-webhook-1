@@ -7,6 +7,7 @@
 6 silly config load:file:E:\dental-webhook\dental-webhook-1\%APPDATA%\npm\etc\npmrc
 7 verbose title npm run dev
 8 verbose argv "run" "dev"
-9 verbose logfile logs-max:10 dir:E:\dental-webhook\dental-webhook-1\%APPDATA%\npm-cache\_logs\2026-05-20T22_14_46_306Z-
-10 verbose logfile E:\dental-webhook\dental-webhook-1\%APPDATA%\npm-cache\_logs\2026-05-20T22_14_46_306Z-debug-0.log
+9 verbose logfile logs-max:10 dir:E:\dental-webhook\dental-webhook-1\%APPDATA%\npm-cache\_logs\2026-05-22T09_52_22_782Z-
+10 verbose logfile E:\dental-webhook\dental-webhook-1\%APPDATA%\npm-cache\_logs\2026-05-22T09_52_22_782Z-debug-0.log
 11 silly logfile done cleaning log files
+12 http fetch GET 200 https://registry.npmjs.org/npm 2375ms
