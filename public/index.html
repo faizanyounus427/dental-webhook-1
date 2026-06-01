@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileCare Dental Clinic - AI Command Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .loading-skeleton { background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col z-10">
+            <div class="p-6 border-b border-slate-100 flex items-center gap-3">
+                <div class="bg-teal-500 text-white p-2.5 rounded-xl shadow-md shadow-teal-500/20">
+                    <i class="fa-solid fa-tooth text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 tracking-tight text-sm">Smile Care Dental Clinic</h1>
+                    <span class="text-xs text-teal-600 font-medium">AI Receptionist Agent</span>
+                </div>
+            </div>
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-teal-50 text-teal-700 rounded-xl font-medium text-sm transition-all">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="text-xs font-semibold text-slate-600">AI Voice Node Live</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content Area -->
+        <main class="flex-1 overflow-y-auto bg-slate-50 relative focus:outline-none">
+            
+            <!-- Clinic Top Header Area -->
+            <header class="bg-white border-b border-slate-200 sticky top-0 z-20 px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-teal-100 text-teal-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">Active Practice</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1" id="clinicName">SmileCare Dental Clinic</h2>
+                    <p class="text-xs text-slate-500 mt-0.5 flex items-center gap-3 flex-wrap">
+                        <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i> Medical Arts District, Suite 420</span>
+                        <span><i class="fa-solid fa-envelope text-slate-400 mr-1"></i> desk@smilecaredental.com</span>
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 self-stretch sm:self-auto">
+                    <div class="bg-slate-100 rounded-xl p-1 flex gap-1 w-full sm:w-auto">
+                        <button class="px-4 py-2 text-xs font-medium bg-white text-slate-800 rounded-lg shadow-sm">Live Feed</button>
+                        <button class="px-4 py-2 text-xs font-medium text-slate-500 hover:text-slate-800 rounded-lg">Analytics</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-8 space-y-8 max-w-[1600px] mx-auto">
+                
+                <!-- Performance Statistics Metrics Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <!-- Total Calls Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Calls</p>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-1" id="stat-calls">-</h3>
+                            <span class="text-xs text-emerald-600 font-medium flex items-center gap-1 mt-1">
+                                <i class="fa-solid fa-arrow-trend-up"></i> Updated now
+                            </span>
+                        </div>
+                        <div class="bg-indigo-50 text-indigo-600 p-3.5 rounded-xl"><i class="fa-solid fa-phone text-xl"></i></div>
+                    </div>
+                    
+                    <!-- Total Appointments Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Booked</p>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-1" id="stat-total">-</h3>
+                            <span class="text-xs text-slate-500 font-medium block mt-1">Current Month</span>
+                        </div>
+                        <div class="bg-teal-50 text-teal-600 p-3.5 rounded-xl"><i class="fa-solid fa-calendar text-xl"></i></div>
+                    </div>
+
+                    <!-- Completed Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Completed</p>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-1" id="stat-completed">-</h3>
+                            <span class="text-xs text-emerald-600 font-medium block mt-1">✓ Successfully Booked</span>
+                        </div>
+                        <div class="bg-emerald-50 text-emerald-600 p-3.5 rounded-xl"><i class="fa-solid fa-circle-check text-xl"></i></div>
+                    </div>
+
+                    <!-- Scheduled Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Scheduled</p>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-1" id="stat-scheduled">-</h3>
+                            <span class="text-xs text-amber-600 font-medium block mt-1">⌛ Pending Confirmation</span>
+                        </div>
+                        <div class="bg-amber-50 text-amber-600 p-3.5 rounded-xl"><i class="fa-solid fa-clock text-xl"></i></div>
+                    </div>
+
+                    <!-- Cancelled Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Cancelled</p>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-1" id="stat-cancelled">-</h3>
+                            <span class="text-xs text-rose-600 font-medium block mt-1">Cancellations</span>
+                        </div>
+                        <div class="bg-rose-50 text-rose-600 p-3.5 rounded-xl"><i class="fa-solid fa-circle-xmark text-xl"></i></div>
+                    </div>
+                </div>
+
+                <!-- Comprehensive Appointment & Patient Matrix Table -->
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Patient Manifest & Queue</h3>
+                            <p class="text-xs text-slate-500">Real-time tracking of entries managed by the AI Voice Agent.</p>
+                        </div>
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="searchInput" placeholder="Search ID, name, or phone..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                    <th class="py-4 px-6">Call ID</th>
+                                    <th class="py-4 px-6">Patient Details</th>
+                                    <th class="py-4 px-6">Schedule / Timing</th>
+                                    <th class="py-4 px-6">Reason</th>
+                                    <th class="py-4 px-6 text-center">Sentiment</th>
+                                    <th class="py-4 px-6">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-sm" id="appointment-table-body">
+                                <tr><td colspan="6" class="py-8 px-6 text-center text-slate-500"><i class="fa-solid fa-spinner animate-spin mr-2"></i>Loading appointments...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+        const CLINIC_NAME = 'SmileCare-Dental-Clinic';
+        let allAppointments = [];
+
+        // Generate Patient UID
+        function generatePatientUID(name) {
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return `SC-${Math.abs(hash % 9000) + 1000}`;
+        }
+
+        // Get Sentiment Badge Color
+        function getSentimentBadge(sentiment) {
+            const sentiments = {
+                'positive': { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-100' },
+                'negative': { bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-100' },
+                'neutral': { bg: 'bg-slate-50', text: 'text-slate-700', border: 'border-slate-100' }
+            };
+            return sentiments[sentiment] || sentiments['neutral'];
+        }
+
+        // Get Status Badge
+        function getStatusBadge(status) {
+            const statuses = {
+                'scheduled': { bg: 'bg-amber-100', text: 'text-amber-800' },
+                'confirmed': { bg: 'bg-blue-100', text: 'text-blue-800' },
+                'completed': { bg: 'bg-emerald-100', text: 'text-emerald-800' },
+                'cancelled': { bg: 'bg-rose-100', text: 'text-rose-800' }
+            };
+            return statuses[status] || statuses['scheduled'];
+        }
+
+        // Fetch Appointments
+        async function fetchAppointments() {
+            try {
+                const response = await fetch(`${API_BASE}/api/appointments/clinic/${CLINIC_NAME}`);
+                if (!response.ok) throw new Error('Failed to fetch appointments');
+                
+                const appointments = await response.json();
+                allAppointments = Array.isArray(appointments) ? appointments : [];
+                
+                renderTable(allAppointments);
+                updateStatistics();
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+                document.getElementById('appointment-table-body').innerHTML = 
+                    '<tr><td colspan="6" class="py-8 px-6 text-center text-red-500"><i class="fa-solid fa-exclamation-circle mr-2"></i>Failed to load appointments. Make sure webhook is configured.</td></tr>';
+            }
+        }
+
+        // Fetch Statistics
+        async function updateStatistics() {
+            try {
+                const response = await fetch(`${API_BASE}/api/appointments/stats/${CLINIC_NAME}`);
+                if (!response.ok) throw new Error('Failed to fetch stats');
+                
+                const stats = await response.json();
+                document.getElementById('stat-total').textContent = stats.totalAppointments || 0;
+                document.getElementById('stat-completed').textContent = stats.completedCalls || 0;
+                document.getElementById('stat-scheduled').textContent = allAppointments.filter(a => a.status === 'scheduled').length;
+                document.getElementById('stat-cancelled').textContent = allAppointments.filter(a => a.status === 'cancelled').length;
+                document.getElementById('stat-calls').textContent = allAppointments.length;
+            } catch (error) {
+                console.error('Error fetching statistics:', error);
+                document.getElementById('stat-total').textContent = '0';
+            }
+        }
+
+        // Render Table
+        function renderTable(appointments) {
+            const tbody = document.getElementById('appointment-table-body');
+            
+            if (!appointments || appointments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="py-8 px-6 text-center text-slate-500"><i class="fa-solid fa-inbox mr-2"></i>No appointments yet. Waiting for first call...</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = appointments.map(apt => {
+                const sentiment = getSentimentBadge(apt.sentiment || 'neutral');
+                const status = getStatusBadge(apt.status || 'scheduled');
+                const uid = generatePatientUID(apt.patientName || 'Unknown');
+                const appointmentDate = new Date(apt.appointmentDate).toLocaleDateString();
+                const appointmentTime = apt.appointmentTime || 'TBD';
+
+                return `
+                    <tr class="hover:bg-slate-50/70 transition-all">
+                        <td class="py-4 px-6 font-mono text-xs text-slate-500 font-semibold">${uid}</td>
+                        <td class="py-4 px-6">
+                            <div class="font-semibold text-slate-900">${apt.patientName || 'Not provided'}</div>
+                            <div class="text-xs text-slate-500 mt-0.5">${apt.phoneNumber || 'No phone'}</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="font-medium text-slate-900">${appointmentTime}</div>
+                            <div class="text-xs text-teal-600 font-medium mt-0.5">${appointmentDate}</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="text-xs text-slate-700">${apt.reasonForVisit || 'General visit'}</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="flex items-center justify-center">
+                                <span class="px-3 py-1 rounded text-xs font-medium ${sentiment.bg} ${sentiment.text} border ${sentiment.border}">
+                                    ${apt.sentiment || 'neutral'}
+                                </span>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded-full ${status.bg} ${status.text}">${apt.status || 'scheduled'}</span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Search Functionality
+        document.getElementById('searchInput')?.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = allAppointments.filter(apt => 
+                (apt.patientName || '').toLowerCase().includes(searchTerm) ||
+                (apt.phoneNumber || '').includes(searchTerm)
+            );
+            renderTable(filtered);
+        });
+
+        // Auto-refresh every 5 seconds
+        setInterval(() => {
+            fetchAppointments();
+        }, 5000);
+
+        // Initial load
+        fetchAppointments();
+    </script>
+</body>
+</html>
